@@ -1,0 +1,13 @@
+name: my-first-github-workflow
+
+on: 
+   push:
+      branches:
+         - main
+jobs:
+   job1:
+     name: First-Job
+     runs-on: ubuntu-latest
+     steps:
+        - name: first step
+          run: echo "Hello World"
