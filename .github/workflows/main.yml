@@ -16,21 +16,15 @@ jobs:
      steps:
         - name: firstjob-first step
           run: echo "Hello World"
-   job2:
-    needs: job1
-    name: Second-Job
-    runs-on: ubuntu-latest
-    steps:
-       - name: secondjob-firststep
-         run: hostname
-       - name: secondjob-secondstep
-         run: |
-            echo "Somethinggg"
-            echo "Welcome to Github Actions"   
-   job3:
-     name: third-Job
-     runs-on: windows-latest
-     steps:
-        - name: thirdjob-first step
-          shell: pwsh
-          run: get-computerinfo
+        - name: Check Directory
+          run: |
+            pwd
+            ls -ltr
+            hostname
+        - name: Checkout
+          uses: actions/checkout@v7
+        - name: Check Directory
+          run: |
+            pwd
+            ls -ltr
+            hostname
