@@ -22,3 +22,10 @@ jobs:
          run: |
             echo "Somethinggg"
             echo "Welcome to Github Actions"   
+   job3:
+     name: third-Job
+     runs-on: windows-latest
+     steps:
+        - name: thirdjob-first step
+          shell: pwsh
+          run: get-computerinfo
