@@ -9,5 +9,15 @@ jobs:
      name: First-Job
      runs-on: ubuntu-latest
      steps:
-        - name: first step
+        - name: firstjob-first step
           run: echo "Hello World"
+   job2:
+    name: Second-Job
+    runs-on: ubuntu-latest
+    steps:
+       - name: secondjob-firststep
+         run: hostname
+       - name: secondjob-secondstep
+         run: |
+            echo "Somethinggg"
+            echo "Welcome to Github Actions"   
