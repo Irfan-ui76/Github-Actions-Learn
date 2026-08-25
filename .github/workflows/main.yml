@@ -1,13 +1,14 @@
 name: my-first-github-workflow
 
-# on: 
-#    push:
-#       branches:
-#          - main
-on:
-   schedule:
-     - cron: "*/5 * * * *"
+on: 
+   push:
+      branches:
+         - main
    workflow_dispatch: 
+# on:
+#    schedule:
+#      - cron: "*/5 * * * *"
+   # workflow_dispatch: 
 jobs:
    job1:
      name: First-Job
