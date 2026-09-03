@@ -9,40 +9,58 @@ on:
 #    schedule:
 #      - cron: "*/5 * * * *"
    # workflow_dispatch: 
-jobs:
-   job1:
-     name: First-Job
-     runs-on: ubuntu-latest
-     steps:
-        - name: firstjob-first step
-          run: echo "Hello World"
-        - name: Check Directory
-          run: |
-            pwd
-            ls -ltr
-            hostname
-        - name: Checkout
-          uses: actions/checkout@v7
-        - name: Check Directory
-          run: |
-            echo `pwd` >> myartifact.txt
-            mkdir artifacts
-            echo `ls -ltr` >> artifacts/list.txt
-            echo `hostname` >> hostname.txt
-        - name: upload artifact
-          uses: actions/upload-artifact@v7
-          with:
-            name: demoartifact
-            path: ./myartifact.txt
-        - name: upload from directory
-          uses: actions/upload-artifact@v7
-          with: 
-            name: upload single artifact
-            path: artifacts/
-        - name: upload from multiple directory
-          uses: actions/upload-artifact@v7
-          with: 
-            name: upload multiple artifact
-            path: |
-              myartifact.txt
-              artifacts/
+jobs:  
+  job1:
+    name: First-Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: firstjob-first step
+        run: echo "Hello World"
+      - name: Check Directory
+        run: |
+          pwd
+          ls -ltr
+          hostname
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Check Directory
+        run: |
+          echo `pwd` >> myartifact.txt
+          mkdir artifacts
+          echo `ls -ltr` >> artifacts/list.txt
+          echo `hostname` >> hostname.txt
+      - name: upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: demoartifact
+          path: ./myartifact.txt
+      - name: upload from directory
+        uses: actions/upload-artifact@v7
+        with: 
+          name: upload single artifact
+          path: artifacts/
+      - name: upload from multiple directory
+        uses: actions/upload-artifact@v7
+        with: 
+          name: upload multiple artifact
+          path: |
+            myartifact.txt
+            artifacts/
+  job2:
+    name: Second-Job
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - name: Check Directory
+        run: |
+          pwd
+          ls -ltr
+      - name: Download Single Artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: upload single artifact
+      - name: Check Directory 2
+        run: |
+          pwd
+          ls -ltr    
+
