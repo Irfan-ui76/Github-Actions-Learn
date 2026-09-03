@@ -3,7 +3,7 @@ name: my-first-github-workflow
 on: 
    push:
       branches:
- #        - dev
+         - dev
          - main
 #         - 'feature-*'
    pull_request:
