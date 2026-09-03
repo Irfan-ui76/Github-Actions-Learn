@@ -3,9 +3,9 @@ name: my-first-github-workflow
 on: 
    push:
       branches:
-         - dev
+ #        - dev
          - main
-         - 'feature-*'
+#         - 'feature-*'
    pull_request:
      branches:
        - main      
@@ -53,5 +53,5 @@ jobs:
           pwd
           ls -ltr    
       - name: exit step
-        run: exit 1
+        run: exit 0
       
