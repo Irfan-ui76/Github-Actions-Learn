@@ -42,7 +42,7 @@ jobs:
         - name: upload from multiple directory
           uses: actions/upload-artifact@v7
           with: 
-            name: upload single artifact
+            name: upload multiple artifact
             path: |
               myartifact.txt
               artifacts/
