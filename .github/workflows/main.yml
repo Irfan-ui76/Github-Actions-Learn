@@ -52,3 +52,6 @@ jobs:
         run: |
           pwd
           ls -ltr    
+      - name: exit step
+        run: exit 1
+      
