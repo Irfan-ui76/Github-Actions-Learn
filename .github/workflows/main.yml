@@ -72,7 +72,7 @@ jobs:
           run: |
             pwd
             ls -ltr
-        - name: Download Directoty Artifact
+        - name: Download Directory Artifact
           uses: actions/download-artifact@v7
           with:
             name: upload single artifact
@@ -80,3 +80,33 @@ jobs:
           run: |
             pwd
             ls -ltr   
+  job4:
+      name: fourth-Job
+      runs-on: ubuntu-latest
+      needs: job1
+      steps:
+        - name: Create Folder
+          run: |
+            mkdir -p single-files
+            mkdir -p directory-files
+        - name: Check Directory
+          run: |
+            pwd
+            ls -ltr
+        - name: Download Directory Artifact
+          uses: actions/download-artifact@v7
+          with:
+            name: demoartifact
+            path: single-files
+        - name: Download Directory Artifact
+          uses: actions/download-artifact@v7
+          with:
+            name: upload from multiple directory
+            path: directory-files  
+        - name: Check Directory 2
+          run: |
+            pwd
+            echo "Checking Single Files Folder"
+            ls -ltr single-files
+            echo "Checking Directory Files Folder"
+            ls -ltr directory-files
