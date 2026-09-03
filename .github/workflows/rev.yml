@@ -1,0 +1,14 @@
+name: my-rev-workflow
+on:
+    push:
+        branches: 
+            - main
+jobs:
+    buildjob:
+        name: dotnet-build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Welcomestep
+              run: echo "Hello World"
+            - name: Inbuilt Action
+              uses: actions/checkout@v7
