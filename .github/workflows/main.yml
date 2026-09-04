@@ -9,7 +9,10 @@ on:
    pull_request:
      branches:
        - main      
-
+env:
+  Deployment_Target: Dev
+  App_user: Irfan
+  AppPort: 80
 jobs:  
   job1:
     name: First-Job
@@ -52,6 +55,8 @@ jobs:
         run: |
           pwd
           ls -ltr    
-      - name: exit step
-        run: exit 0
+      - name: Referring Env Variables
+        run: |
+           echo "$App_user is Deploying in $Deployment_Target Environment"
+           echo "Application is running in Port number $AppPort"
       
