@@ -14,74 +14,94 @@ env:
   App_user: Irfan
   AppPort: 80  
 jobs:  
-  job1:
-    name: First-Job
-    runs-on: ubuntu-latest
-    steps:
-      - name: firstjob-first step
-        run: echo "Hello World"
-      - name: Check Directory
-        run: |
-          pwd
-          ls -ltr
-          hostname
-      - name: Checkout
-        uses: actions/checkout@v7
-      - name: Check Directory
-        run: |
-          echo `pwd` >> myartifact.txt
-          mkdir artifacts
-          echo `ls -ltr` >> artifacts/list.txt
-          echo `hostname` >> artifacts/hostname.txt
-      - name: upload artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: demoartifact
-          path: ./myartifact.txt
-  job2:
-    name: Second-Job
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - name: Check Directory
-        run: |
-          pwd
-          ls -ltr
-      - name: Download Single Artifact
-        uses: actions/download-artifact@v7
-        with:
-          name: demoartifact
-      - name: Check Directory 2
-        run: |
-          pwd
-          ls -ltr    
-      - name: Referring Env Variables
-        run: |
-           echo "$App_user is Deploying in $Deployment_Target Environment"
-           echo "Application is running in Port number $AppPort"
-      - name: Reffer Repository Secrets
-        run: |
-           echo "${{secrets.APP_PASSWORD}}"
-  job3:
-     name: Third-Job
+  # job1:
+  #   name: First-Job
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: firstjob-first step
+  #       run: echo "Hello World"
+  #     - name: Check Directory
+  #       run: |
+  #         pwd
+  #         ls -ltr
+  #         hostname
+  #     - name: Checkout
+  #       uses: actions/checkout@v7
+  #     - name: Check Directory
+  #       run: |
+  #         echo `pwd` >> myartifact.txt
+  #         mkdir artifacts
+  #         echo `ls -ltr` >> artifacts/list.txt
+  #         echo `hostname` >> artifacts/hostname.txt
+  #     - name: upload artifact
+  #       uses: actions/upload-artifact@v7
+  #       with:
+  #         name: demoartifact
+  #         path: ./myartifact.txt
+  # job2:
+  #   name: Second-Job
+  #   runs-on: ubuntu-latest
+  #   needs: job1
+  #   steps:
+  #     - name: Check Directory
+  #       run: |
+  #         pwd
+  #         ls -ltr
+  #     - name: Download Single Artifact
+  #       uses: actions/download-artifact@v7
+  #       with:
+  #         name: demoartifact
+  #     - name: Check Directory 2
+  #       run: |
+  #         pwd
+  #         ls -ltr    
+  #     - name: Referring Env Variables
+  #       run: |
+  #          echo "$App_user is Deploying in $Deployment_Target Environment"
+  #          echo "Application is running in Port number $AppPort"
+  #     - name: Reffer Repository Secrets
+  #       run: |
+  #          echo "${{secrets.APP_PASSWORD}}"
+  # job3:
+  #    name: Third-Job
+  #    runs-on: ubuntu-latest
+  #    needs: job2
+  #    steps:
+  #     - name: Github Context Variables
+  #       run: |
+  #         echo "New Changes are done by ${{github.actor}} in ${{github.ref_name}}"
+  #         echo "${{github.event_name}}"
+  #         echo "${{github.job}}"
+  #         echo "run ID of the current job ${{job.check_run_id}}"
+  Dev_Job:
+     name: Dev-Job
      runs-on: ubuntu-latest
-     needs: job2
-     steps:
-      - name: Github Context Variables
-        run: |
-          echo "New Changes are done by ${{github.actor}} in ${{github.ref_name}}"
-          echo "${{github.event_name}}"
-          echo "${{github.job}}"
-          echo "run ID of the current job ${{job.check_run_id}}"
-  job4:
-     name: Fourth-Job
-     runs-on: ubuntu-latest
-     needs: [job1,job2,job3]
+     #needs: [job1,job2,job3]
      environment: DEV
      steps:
       - name: Refer Environment Specific Variables
         run: |
            echo "{{secrets.DEV_DB_PASSCODE}}"
            echo "{{vars.APP_NAME}}"
-          
-     
+  STG_Job:
+     name: Fourth-Job
+     runs-on: ubuntu-latest
+     #needs: [job1,job2,job3]
+     environment: STG
+     if: github.ref == 'dev'
+     steps:
+      - name: Refer Environment Specific Variables
+        run: |
+           echo "{{secrets.STG_DB_PASSCODE}}"
+           echo "{{vars.APP_NAME}}"    
+  PRD_Job:
+     name: Fourth-Job
+     runs-on: ubuntu-latest
+     #needs: [job1,job2,job3]
+     environment: PRD
+     if: github.ref == 'main'
+     steps:
+      - name: Refer Environment Specific Variables
+        run: |
+           echo "{{secrets.PRD_DB_PASSCODE}}"
+           echo "{{vars.APP_NAME}}"     
