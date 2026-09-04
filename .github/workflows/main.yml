@@ -82,8 +82,8 @@ jobs:
      steps:
       - name: Refer Environment Specific Variables
         run: |
-           echo "{{secrets.DEV_DB_PASSCODE}}"
-           echo "{{vars.APP_NAME}}"
+           echo "${{secrets.DEV_DB_PASSCODE}}"
+           echo "${{vars.APP_NAME}}"
   STG_Job:
      name: STG-Job
      runs-on: ubuntu-latest
@@ -93,8 +93,8 @@ jobs:
      steps:
       - name: Refer Environment Specific Variables
         run: |
-           echo "{{secrets.STG_DB_PASSCODE}}"
-           echo "{{vars.APP_NAME}}"    
+           echo "${{secrets.STG_DB_PASSCODE}}"
+           echo "${{vars.APP_NAME}}"    
   PRD_Job:
      name: PRD-Job
      runs-on: ubuntu-latest
@@ -104,5 +104,5 @@ jobs:
      steps:
       - name: Refer Environment Specific Variables
         run: |
-           echo "{{secrets.PRD_DB_PASSCODE}}"
-           echo "{{vars.APP_NAME}}"     
+           echo "${{secrets.PRD_DB_PASSCODE}}"
+           echo "${{vars.APP_NAME}}"     
