@@ -85,7 +85,7 @@ jobs:
            echo "{{secrets.DEV_DB_PASSCODE}}"
            echo "{{vars.APP_NAME}}"
   STG_Job:
-     name: Fourth-Job
+     name: STG-Job
      runs-on: ubuntu-latest
      needs: Dev_Job
      environment: STG
@@ -96,7 +96,7 @@ jobs:
            echo "{{secrets.STG_DB_PASSCODE}}"
            echo "{{vars.APP_NAME}}"    
   PRD_Job:
-     name: Fourth-Job
+     name: PRD-Job
      runs-on: ubuntu-latest
      needs: [Dev_Job,STG_Job]
      environment: PRD
