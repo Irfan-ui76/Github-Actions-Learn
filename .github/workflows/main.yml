@@ -72,3 +72,4 @@ jobs:
             echo "New Changes are done by ${{github.actor}} in ${{github.ref_name}} "
             echo "${{github.event_name}}"
             echo "${{github.job}}"
+            echo "run ID of the current job ${{job.check_run_id}}"
