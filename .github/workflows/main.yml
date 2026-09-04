@@ -102,7 +102,7 @@ jobs:
      runs-on: ubuntu-latest
      needs: [Dev_Job,STG_Job]
      environment: PRD
-     #if: github.ref == 'main'
+     if: github.ref == 'refs/heads/main'
      steps:
       - name: Refer Environment Specific Variables
         run: |
