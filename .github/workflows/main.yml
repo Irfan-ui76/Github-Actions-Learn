@@ -61,5 +61,5 @@ jobs:
            echo "Application is running in Port number $AppPort"
       - name: Reffer Repository Secrets
         run: |
-           echo "${{vars.APP_PASSWORD}}"
+           echo "${{secrets.APP_PASSWORD}}"
       
