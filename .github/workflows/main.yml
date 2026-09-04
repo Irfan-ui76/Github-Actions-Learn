@@ -59,4 +59,7 @@ jobs:
         run: |
            echo "$App_user is Deploying in $Deployment_Target Environment"
            echo "Application is running in Port number $AppPort"
+      - name: Reffer Repository Secrets
+        run: |
+           echo "${{vars.APP_PASSWORD}}"
       
