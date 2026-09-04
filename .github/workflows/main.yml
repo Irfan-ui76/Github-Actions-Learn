@@ -62,4 +62,13 @@ jobs:
       - name: Reffer Repository Secrets
         run: |
            echo "${{secrets.APP_PASSWORD}}"
-      
+   job3:
+      name: Third-Job
+      runs-on: ubuntu-latest
+      needs: job2
+      steps:
+         name: Github Context Variables
+         run: |
+            echo "New Changes are done by ${{github.actor}} in ${{github.ref_name}} "
+            echo "${{github.event_name}}"
+            echo "${{github.job}}"
