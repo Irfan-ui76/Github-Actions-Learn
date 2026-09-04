@@ -1,6 +1,8 @@
 name: my-first-github-workflow
 
 on: 
+   workflow_dispatch:
+      
 #    push:
 #       branches:
 #          - dev
@@ -9,7 +11,7 @@ on:
 #    pull_request:
 #      branches:
 #        - main    
-   workflow_dispatch:     
+   # workflow_dispatch:     
 env:
   Deployment_Target: Dev
   App_user: Irfan
