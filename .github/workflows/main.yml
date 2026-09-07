@@ -18,15 +18,9 @@ env:
 jobs:  
   reusejob:
     name: Reuse Job
-    runs-on: ubuntu-latest
-    steps:
-      - name: reuse job step
-        uses: Irfan-ui76/reusable-workflows/.github/workflows/reuse-ci.yml@main
-        with:
-          Deployment_Target: ${{ env.Deployment_Target }}
-          App_user: ${{ env.App_user }}
-          AppPort: ${{ env.AppPort }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    uses: Irfan-ui76/reusable-workflows/.github/workflows/reuse-ci.yml@main
+    secrets:  
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
   # unit-test:
   #    name: Unit-test Job
   #    runs-on: ubuntu-latest
